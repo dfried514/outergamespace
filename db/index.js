@@ -142,6 +142,57 @@ db.getAllUsers = () => {
   });
 };
 
+db.storeMessage = (username, message) => {
+  const queryString = `
+    INSERT INTO messages
+    (username, message)
+    VALUES
+    ('${username}', '${message}')
+  `;
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+        connection.release();
+      } else {
+        connection.query(queryString, (error, results) => {
+          if (err) {
+            reject(err);
+            connection.release();
+          } else {
+            resolve(results);
+            connection.release();
+          }
+        });
+      }
+    });
+  });
+};
+
+db.getAllMessages = () => {
+  const queryString = `
+    SELECT * FROM messages ORDER BY datetime DESC LIMIT 50
+  `;
+  return new Promise((resolve, reject) => {
+    pool.getConnection((err, connection) => {
+      if (err) {
+        reject(err);
+        connection.release();
+      } else {
+        connection.query(queryString, (error, results) => {
+          if (err) {
+            reject(err);
+            connection.release();
+          } else {
+            resolve(results);
+            connection.release();
+          }
+        });
+      }
+    });
+  });
+};
+
 db.addGame = (game) => {
   const { roomId, username, noOfQuestions, timePerQuestion, maxPlayers, category, difficulty } = game;
   const queryString = `
