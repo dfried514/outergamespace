@@ -3,6 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import GameList from './GameList';
 import Leaderboard from './Leaderboard';
+import ChatBar from './ChatBar';
 import SocketClientInterface from '../../../../socket/socketClientInterface';
 
 const propTypes = {
@@ -25,6 +26,8 @@ class Lobby extends React.Component {
       chatMessages: []
     };
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.chatHandler = this.chatHandler.bind(this);
     this.joinGame = this.joinGame.bind(this);
     this.getAllUsers = this.getAllUsers.bind(this);
@@ -135,7 +138,6 @@ class Lobby extends React.Component {
                 />
               </div>
             </div>
-            <div className={`col-sm-3 game-list ${this.state.gamePanelRender}`}>
               <GameList
                 createGame={this.props.createGame}
                 joinGame={this.joinGame}
@@ -144,7 +146,6 @@ class Lobby extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }
