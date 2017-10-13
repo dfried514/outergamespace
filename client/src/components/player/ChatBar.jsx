@@ -19,7 +19,9 @@ class ChatBar extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     props.handleMessage(this.state.message);
+
     var chatWindow = this.refs.chatWindow;
     chatWindow.value = '';
     this.setState({
