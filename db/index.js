@@ -171,7 +171,7 @@ db.storeMessage = (username, message) => {
 
 db.getAllMessages = () => {
   const queryString = `
-    SELECT * FROM messages
+    SELECT * FROM (SELECT * FROM messages ORDER BY id DESC LIMIT 32) SUB ORDER BY id ASC
   `;
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {

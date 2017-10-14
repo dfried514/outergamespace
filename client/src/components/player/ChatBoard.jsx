@@ -6,9 +6,7 @@ const ChatBoard = props => {
     <ChatMessage key={index} messageObj={messageObj} />
   );
   return (
-    <div>
-      <ul>{chatMsgItems}</ul>
-    </div>
+    <ul>{chatMsgItems}</ul>
   );
 }
 
