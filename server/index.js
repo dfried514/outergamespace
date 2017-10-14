@@ -82,6 +82,17 @@ app.post('/register', (req, res) => {
     .catch(err => console.error(err));
 });
 
+app.get('/chatMessages', (req, res) => {
+  db.getAllMessages()
+    .then((results) => {
+      res.send(results);
+    })
+    .catch((err) => {
+      res.status(500).send('Could not grab messages');
+      console.error(err);
+    });
+});
+
 app.get('/users', (req, res) => {
   db.getAllUsers()
     .then((results) => {

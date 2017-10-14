@@ -56,6 +56,7 @@ class SocketServerInterface {
     this.io.on('connection', (socket) => {
       socket.on('createRoom', this.handleCreateRoom.bind(this, socket));
       socket.on('joinRoom', this.handleJoinRoom.bind(this, socket));
+      socket.on('chat', this.handleChat.bind(this, socket));
     });
   }
 
@@ -138,6 +139,17 @@ class SocketServerInterface {
       .then(() => {
         this.trivia.endGame(roomId);
         callback(null);
+      })
+      .catch(console.error);
+  }
+
+  handleChat(socket, username, message, callback) {
+    db.storeMessage(username, message)
+      .then(() => {
+        db.getAllMessages()
+        .then((results) => {
+          callback(null, results);
+        })
       })
       .catch(console.error);
   }

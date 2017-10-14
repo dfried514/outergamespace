@@ -29,6 +29,7 @@ class Lobby extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.chatHandler = this.chatHandler.bind(this);
+    this.getAllChatMessages = this.getAllChatMessages.bind(this);
     this.joinGame = this.joinGame.bind(this);
     this.getAllUsers = this.getAllUsers.bind(this);
     this.getChatMessages = this.getChatMessages.bind(this);
@@ -44,6 +45,16 @@ class Lobby extends React.Component {
     }, 600);
     this.getAllUsers();
     this.getChatMessages();
+  }
+
+  getAllChatMessages() {
+    axios.get('/chatMessages')
+      .then((response) => {
+        this.setState({
+          chatMessages: response.data
+        });
+      })
+      .catch(err => console.error(err));
   }
 
   getAllUsers() {

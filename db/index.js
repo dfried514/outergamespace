@@ -171,7 +171,7 @@ db.storeMessage = (username, message) => {
 
 db.getAllMessages = () => {
   const queryString = `
-    SELECT * FROM messages ORDER BY datetime DESC LIMIT 50
+    SELECT * FROM messages
   `;
   return new Promise((resolve, reject) => {
     pool.getConnection((err, connection) => {

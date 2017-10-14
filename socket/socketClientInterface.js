@@ -26,6 +26,7 @@ class SocketClientInterface {
     this.connection.on('showRoundScores', this.handleHostShowRoundScores.bind(this));
     this.connection.on('showFinalScores', this.handleHostShowFinalScores.bind(this));
     this.connection.on('showAnswer', this.handleHostShowAnswer.bind(this));
+  //  this.connection.on('chat', this.handleHostChat.bind(this));
   }
 
   listenForPlayerEvents() {
@@ -53,6 +54,7 @@ class SocketClientInterface {
     this.connection.removeAllListeners('gameStarted');
     this.connection.removeAllListeners('leaveGame');
     this.connection.removeAllListeners('nextQuestion');
+
     this.connection.removeAllListeners('showAnswer');
     this.connection.removeAllListeners('showRoundScores');
     this.connection.removeAllListeners('showFinalScores');
@@ -77,6 +79,9 @@ class SocketClientInterface {
   handleHostShowAnswer(answer) {
     this.callbacks.host.showAnswer(answer);
   }
+  // handleHostChat(messages) {
+  //   this.callback.host.chat(messages);
+  // }
 
   /* EVENT HANDLERS - PLAYER */
   handlePlayerNewGame(roomId) {
@@ -104,7 +109,7 @@ class SocketClientInterface {
     this.callbacks.player.showFinalScores(players);
   }
   handlePlayerHostDisconnect() {
-    // null for now since there's no data to send back
+    // null for now since there's no data to send ack
     this.callbacks.player.hostDisconnect(null, null);
   }
 
@@ -125,6 +130,9 @@ class SocketClientInterface {
   registerCallbackHostShowAnswer(callback) {
     this.callbacks.host.showAnswer = callback;
   }
+  // registerCallbackHostChat(callback) {
+  //   this.callbacks.host.chat = callback;
+  // }
 
   /* EVENT CALLBACK REGISTRY - PLAYER */
   registerCallbackPlayerNewGame(callback) {
