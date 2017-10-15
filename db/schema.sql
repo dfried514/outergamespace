@@ -11,7 +11,15 @@ CREATE TABLE users(
   badge VARCHAR(120) NOT NULL
 );
 
-CREATE TABLE open_games(
+CREATE TABLE messages (
+  id int NOT NULL AUTO_INCREMENT,
+  username varchar(30) NOT NULL,
+  message varchar(140) NOT NULL,
+  datetime timestamp DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE games(
   room_id VARCHAR(10) PRIMARY KEY NOT NULL,
   host_username VARCHAR(20) NOT NULL UNIQUE,
   num_questions INT NOT NULL,
